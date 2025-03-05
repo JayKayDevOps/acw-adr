@@ -1,0 +1,40 @@
+Context
+In a contact center environment, agents need time after receiving a contact to complete necessary task. Currently, agents must manually switch to a "Not Ready" state to do after-call work. This can lead to inefficiency and skewed stats in the reporting logs.
+To address this, we propose adding a Timed After Call Work (ACW) feature to the Contact Center Agent UI, which will automatically grant agents a predefined period after each call to complete their work before being available for the next interaction. Once implemented we will then make it by a service level. Support service may  need more time that Sales service. 
+
+Decision
+We will implement a Timed ACW feature in the Contact Center Agent UI with the following characteristics:
+    • Automatic ACW Activation: After ending a call, the agent is placed in ACW mode automatically.
+    • Configurable Timer: ACW time can be set at the system level by administrators and optionally adjusted per queue or agent profile.
+    • UI Timer Display: A visible countdown timer will indicate the remaining ACW time.
+    • Manual Option: Agents can end ACW early if they complete their ACW before the timer ends.
+    • Auto-Return to “Ready”: When the timer expires, the agent is automatically switched back to a “Ready” state.
+    • Reporting & Analytics: ACW metrics will be captured for reporting.
+
+Other Considerations
+    1. Manual ACW Mode Only
+        ◦ Pros: Offers flexibility for agents to manage their time.
+        ◦ Cons: Leads to inconsistent usage and possible delays in handling subsequent calls.
+    2. Fixed ACW with No Early Exit
+        ◦ Pros: Ensures uniform ACW usage across agents.
+        ◦ Cons: Agents may remain in ACW unnecessarily, reducing efficiency. Some services may requier more time than others.
+Results
+    • Improved Efficiency: Agents have structured post-call time, reducing workflow inconsistencies.
+    • Better Adherence to Policies: Ensures that all agents follow a standardized process for post-call work.
+    • Potential Agent Satisfaction Impact: Some agents may find the automatic ACW restrictive; hence, manual end transaction is provided as an option.
+    • Increased System Complexity: Requires backend logic for managing ACW state transitions and UI updates.
+
+Implementation 
+    1. Update the Agent UI to include ACW state indicators and a countdown timer.
+    2. Modify the backend to handle ACW state transitions based on call completion.
+    3. Allow configuration of ACW durations at the system and queue levels.
+    4. Implement manual exit functionality.
+    5. Integrate ACW data into reporting dashboards.
+    6. Conduct testing to validate timing accuracy and state transitions.
+    7. Roll out in phases, starting with pilot groups before full deployment.
+
+Status
+Proposed
+
+Decision Date
+March 5, 2025
